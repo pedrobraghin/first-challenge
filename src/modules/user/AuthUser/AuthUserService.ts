@@ -11,6 +11,8 @@ export class AuthUserService {
     }
     const authorized = await bcrypt.compare(password, user.password);
 
-    return authorized;
+    if (!authorized) {
+      throw new Error('Inalid email or password');
+    }
   }
 }
