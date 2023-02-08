@@ -5,12 +5,12 @@ import { InMemoryUsersRepository } from '../../repositories/implementations/InMe
 import { AuthUserController } from './AuthUser/AuthUserController';
 import { AuthUserService } from './AuthUser/AuthUserService';
 
-const inMemoryUsersRepository = new InMemoryUsersRepository();
+const usersRepository = new InMemoryUsersRepository();
 
-const createUserService = new CreateUserService(inMemoryUsersRepository);
+const createUserService = new CreateUserService(usersRepository);
 const createUserController = new CreateUserController(createUserService);
 
-const authUserService = new AuthUserService(inMemoryUsersRepository);
+const authUserService = new AuthUserService(usersRepository);
 const authUserController = new AuthUserController(authUserService);
 
 export { createUserController, authUserController };
