@@ -5,7 +5,7 @@ export class GetEventsByWeekdayController {
   constructor(private getEventService: GetEventsService) {}
 
   handle(req: Request, res: Response) {
-    const { weekday } = req.params;
+    const weekday = req.query.weekday as string;
 
     try {
       const events = this.getEventService.getEventsByWeekday(+weekday);
