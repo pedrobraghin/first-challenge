@@ -1,7 +1,7 @@
 import { User } from '../../entities/User';
-import { IUserRepository } from '../IUserRepository';
+import { IUsersRepository } from '../IUsersRepository';
 
-export class InMemoryUsersRepository implements IUserRepository {
+export class InMemoryUsersRepository implements IUsersRepository {
   private users: User[] = [];
 
   createUser(user: User): void {

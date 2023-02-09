@@ -1,8 +1,8 @@
-import { IUserRepository } from './../../../repositories/IUserRepository';
+import { IUsersRepository } from '../../../repositories/IUsersRepository';
 import bcrypt from 'bcrypt';
 
 export class AuthUserService {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(private userRepository: IUsersRepository) {}
 
   async execute(email: string, password: string) {
     const user = this.userRepository.findByEmail(email);

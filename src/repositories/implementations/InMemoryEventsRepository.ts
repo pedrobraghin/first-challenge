@@ -1,7 +1,7 @@
 import { Event } from './../../entities/Event';
-import { IEventRepository } from './../IEventRepository';
+import { IEventsRepository } from '../IEventsRepository';
 
-export class InMemoryEventsRepository implements IEventRepository {
+export class InMemoryEventsRepository implements IEventsRepository {
   private events: Event[] = [];
 
   createEvent(event: Event): void {

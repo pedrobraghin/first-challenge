@@ -1,7 +1,7 @@
-import { IEventRepository } from '../../../repositories/IEventRepository';
+import { IEventsRepository } from '../../../repositories/IEventsRepository';
 
 export class GetEventsService {
-  constructor(private eventRepository: IEventRepository) {}
+  constructor(private eventRepository: IEventsRepository) {}
 
   getallEvents() {
     const allEvents = this.eventRepository.getAllEvents();

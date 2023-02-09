@@ -1,9 +1,9 @@
 import { User } from '../../../entities/User';
-import { IUserRepository } from '../../../repositories/IUserRepository';
+import { IUsersRepository } from '../../../repositories/IUsersRepository';
 import bcrypt from 'bcrypt';
 
 export class CreateUserService {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(private userRepository: IUsersRepository) {}
 
   async execute(user: User) {
     const userAlreadyExists = this.userRepository.findByEmail(user.email);

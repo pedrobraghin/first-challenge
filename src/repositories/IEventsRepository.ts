@@ -1,6 +1,6 @@
 import { Event } from '../entities/Event';
 
-export interface IEventRepository {
+export interface IEventsRepository {
   createEvent(event: Event): void;
   getAllEvents(): Event[];
   getEventById(id: string): Event | null;

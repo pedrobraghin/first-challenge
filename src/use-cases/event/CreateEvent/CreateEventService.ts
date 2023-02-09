@@ -1,7 +1,7 @@
+import { IEventsRepository } from './../../../repositories/IEventsRepository';
 import { Event } from './../../../entities/Event';
-import { InMemoryEventsRepository } from './../../../repositories/implementations/InMemoryEventsRepository';
 export class CreateEventService {
-  constructor(private eventsRepository: InMemoryEventsRepository) {}
+  constructor(private eventsRepository: IEventsRepository) {}
 
   execute(event: Event) {
     this.eventsRepository.createEvent(event);

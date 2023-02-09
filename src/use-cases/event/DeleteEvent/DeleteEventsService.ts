@@ -1,7 +1,7 @@
-import { IEventRepository } from '../../../repositories/IEventRepository';
+import { IEventsRepository } from '../../../repositories/IEventsRepository';
 
 export class DeleteEventsService {
-  constructor(private eventsRepository: IEventRepository) {}
+  constructor(private eventsRepository: IEventsRepository) {}
 
   deleteEventById(eventId: string) {
     const event = this.eventsRepository.deleteEventById(eventId);

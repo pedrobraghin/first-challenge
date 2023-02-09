@@ -1,6 +1,6 @@
-import { User } from './../entities/User';
+import { User } from '../entities/User';
 
-export interface IUserRepository {
+export interface IUsersRepository {
   createUser(user: User): void;
   findByEmail(email: string): User | null;
 }
