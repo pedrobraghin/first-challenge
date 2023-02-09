@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { eventSchemaValidator } from '../middlewares/eventSchemaValidator';
 import {
   createEventController,
   getAllEventsController,
@@ -22,7 +23,7 @@ eventRouter.get('/', (req, res) => {
   getAllEventsController.handle(req, res);
 });
 
-eventRouter.post('/', (req, res) => {
+eventRouter.post('/', eventSchemaValidator, (req, res) => {
   createEventController.handle(req, res);
 });
 
