@@ -22,6 +22,10 @@ export class InMemoryEventsRepository implements IEventRepository {
       return eventDate === weekday;
     });
 
+    if (foundEvents.length === 0) {
+      return null;
+    }
+
     return foundEvents;
   }
 
