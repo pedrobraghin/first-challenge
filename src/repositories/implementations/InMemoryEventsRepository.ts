@@ -27,7 +27,7 @@ export class InMemoryEventsRepository implements IEventRepository {
 
   deleteEventById(id: string): Event | null {
     const eventIndex = this.events.findIndex((event) => event._id === id);
-    if (!eventIndex) {
+    if (eventIndex === -1) {
       return null;
     }
 

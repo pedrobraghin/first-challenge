@@ -6,8 +6,9 @@ export class DeleteEventsService {
   deleteEventById(eventId: string) {
     const event = this.eventsRepository.deleteEventById(eventId);
     if (!event) {
-      throw new Error(`Event not found: ${eventId}`);
+      throw new Error(`Event not found`);
     }
+    return event;
   }
 
   deleteEventsByWeekday(weekday: number) {

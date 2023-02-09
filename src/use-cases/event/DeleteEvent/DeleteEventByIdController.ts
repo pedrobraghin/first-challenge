@@ -7,7 +7,14 @@ export class DeleteEventByIdController {
   handle(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      this.deleteEventService.deleteEventById(id);
+      const event = this.deleteEventService.deleteEventById(id);
+      return res.status(200).json({
+        status: 'success',
+        message: 'Event deleted:',
+        data: {
+          event,
+        },
+      });
     } catch (err) {
       if (err instanceof Error) {
         return res.status(404).json({
@@ -16,7 +23,5 @@ export class DeleteEventByIdController {
         });
       }
     }
-
-    res.status(200).send();
   }
 }

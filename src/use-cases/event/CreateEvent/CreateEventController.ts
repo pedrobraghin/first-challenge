@@ -7,7 +7,6 @@ export class CreateEventController {
   handle(req: Request, res: Response) {
     const { description, dateTime, createdAt } = req.body;
     const event = new Event(description, dateTime, createdAt);
-
     try {
       this.createEventService.execute(event);
     } catch (err) {
