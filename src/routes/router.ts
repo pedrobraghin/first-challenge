@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { usersRouter } from './users.routes';
-import { eventRouter } from './event.routes';
+import { eventRouter } from './events.routes';
 
 const router = Router();
 
