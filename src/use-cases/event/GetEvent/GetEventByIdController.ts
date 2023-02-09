@@ -10,7 +10,7 @@ export class GetEventByIdController {
     try {
       const event = this.getEventService.getEventById(id);
 
-      res.status(200).json({
+      return res.status(200).json({
         status: 'success',
         data: {
           event: event,

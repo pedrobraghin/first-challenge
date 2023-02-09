@@ -9,10 +9,11 @@ export class GetEventsByWeekdayController {
 
     try {
       const events = this.getEventService.getEventsByWeekday(+weekday);
-      res.status(200).json({
+
+      return res.status(200).json({
         status: 'success',
         data: {
-          events: events,
+          events: events ?? 'No events found',
         },
       });
     } catch (err) {
