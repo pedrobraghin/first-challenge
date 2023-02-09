@@ -6,7 +6,28 @@ export class CreateUserController {
   constructor(private createUserService: CreateUserService) {}
 
   async handle(req: Request, res: Response) {
-    const user: User = req.body;
+    const {
+      firstName,
+      lastName,
+      birthDate,
+      email,
+      city,
+      country,
+      password,
+      confirmPassword,
+    }: User = req.body;
+
+    const user = new User(
+      firstName,
+      lastName,
+      birthDate,
+      email,
+      city,
+      country,
+      password,
+      confirmPassword
+    );
+
     try {
       await this.createUserService.execute(user);
     } catch (err) {

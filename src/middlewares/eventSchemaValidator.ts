@@ -7,9 +7,9 @@ export async function eventSchemaValidator(
   next: NextFunction
 ) {
   try {
-    const { description, dateTime, createdAt } = req.body;
+    const { description, dateTime } = req.body;
 
-    await eventSchema.validateAsync({ description, dateTime, createdAt });
+    await eventSchema.validateAsync({ description, dateTime });
 
     return next();
   } catch (err) {
