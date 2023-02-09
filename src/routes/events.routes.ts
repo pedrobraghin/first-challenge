@@ -10,15 +10,15 @@ import {
 
 const eventRouter = Router();
 
-eventRouter.get('/:weekday', (req, res) => {
-  getEventsByWeekdayController.handle(req, res);
-});
-
 eventRouter.get('/:id', (req, res) => {
   getEventByIdController.handle(req, res);
 });
 
 eventRouter.get('/', (req, res) => {
+  const { weekday } = req.query;
+  if (weekday) {
+    return getEventsByWeekdayController.handle(req, res);
+  }
   getAllEventsController.handle(req, res);
 });
 
@@ -26,8 +26,11 @@ eventRouter.post('/', (req, res) => {
   createEventController.handle(req, res);
 });
 
-eventRouter.delete('/:weekday', (req, res) => {
-  deleteEventsByWeekdayController.handle(req, res);
+eventRouter.delete('/', (req, res) => {
+  const { weekday } = req.query;
+  if (weekday) {
+    return deleteEventsByWeekdayController.handle(req, res);
+  }
 });
 
 eventRouter.delete('/:id', (req, res) => {
