@@ -7,8 +7,10 @@ export class CreateEventController {
   handle(req: Request, res: Response) {
     const { description, dateTime } = req.body;
     const event = new Event(description, dateTime);
+
     try {
       this.createEventService.execute(event);
+      return res.status(201).send();
     } catch (err) {
       if (err instanceof Error) {
         return res.status(400).json({
@@ -17,7 +19,5 @@ export class CreateEventController {
         });
       }
     }
-
-    return res.status(201).send();
   }
 }

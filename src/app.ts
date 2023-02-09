@@ -17,14 +17,14 @@ app.use(express.json());
 
 app.use(BASE_ROUTE, router);
 
-app.use('*', (req, res) => {
+app.use('*', (_, res) => {
   return res.status(404).json({
     status: 'fail',
     message: 'Route not found',
   });
 });
 
-app.use((err: Error, req: Request, res: Response) => {
+app.use((err: Error, _: Request, res: Response) => {
   if (err instanceof Error) {
     return res.status(400).json({
       status: 'fail',
@@ -33,7 +33,7 @@ app.use((err: Error, req: Request, res: Response) => {
   }
 
   return res.status(500).json({
-    status: 'erro',
+    status: 'error',
     message: 'Internal server error. Please try again later',
   });
 });

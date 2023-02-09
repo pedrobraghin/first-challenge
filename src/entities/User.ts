@@ -10,8 +10,7 @@ export class User {
     public email: string,
     public city: string,
     public country: string,
-    public password: string,
-    public confirmPassword: string
+    public password: string
   ) {
     this._id = uuidv4();
   }

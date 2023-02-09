@@ -6,30 +6,11 @@ export class CreateUserController {
   constructor(private createUserService: CreateUserService) {}
 
   async handle(req: Request, res: Response) {
-    const {
-      firstName,
-      lastName,
-      birthDate,
-      email,
-      city,
-      country,
-      password,
-      confirmPassword,
-    }: User = req.body;
-
-    const user = new User(
-      firstName,
-      lastName,
-      birthDate,
-      email,
-      city,
-      country,
-      password,
-      confirmPassword
-    );
+    const user: User = { ...req.body };
 
     try {
       await this.createUserService.execute(user);
+      return res.status(201).send();
     } catch (err) {
       if (err instanceof Error) {
         return res.status(400).json({
@@ -38,7 +19,5 @@ export class CreateUserController {
         });
       }
     }
-
-    return res.status(201).send();
   }
 }

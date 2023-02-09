@@ -11,11 +11,8 @@ export class CreateUserService {
     if (userAlreadyExists) {
       throw new Error('Email already exists');
     }
-
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt();
     user.password = await bcrypt.hash(user.password, salt);
-    user.confirmPassword = user.password;
-
     this.userRepository.createUser(user);
   }
 }

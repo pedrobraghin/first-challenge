@@ -1,4 +1,4 @@
-import { User } from './../entities/User';
+import { UserDTO } from './../use-cases/user/DTO/UserDTO';
 import { Request, Response, NextFunction } from 'express';
 import { userSchema } from '../schemas/userSchema';
 
@@ -7,29 +7,11 @@ export async function userSchemaValidator(
   res: Response,
   next: NextFunction
 ) {
-  const {
-    firstName,
-    lastName,
-    birthDate,
-    email,
-    city,
-    country,
-    password,
-    confirmPassword,
-  }: User = req.body;
+  const user: UserDTO = { ...req.body };
 
   try {
-    const passwordMatch = password.match(confirmPassword);
-    await userSchema.validateAsync({
-      firstName,
-      lastName,
-      birthDate,
-      email,
-      city,
-      country,
-      password,
-      confirmPassword,
-    });
+    await userSchema.validateAsync(user);
+    const passwordMatch = user.password.match(user.confirmPassword);
 
     if (!passwordMatch) {
       return res.status(400).json({
