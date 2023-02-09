@@ -5,7 +5,7 @@ export class DeleteEventsByWeekdayController {
   constructor(private deleteEventService: DeleteEventsService) {}
 
   handle(req: Request, res: Response) {
-    const { weekday } = req.params;
+    const weekday = req.query.weekday as string;
     try {
       const deletedEvents = this.deleteEventService.deleteEventsByWeekday(
         +weekday
