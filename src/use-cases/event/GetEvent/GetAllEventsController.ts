@@ -11,7 +11,7 @@ export class GetAllEventsController {
       return res.status(200).json({
         status: 'success',
         data: {
-          events: allEvents,
+          events: allEvents ?? 'No events found',
         },
       });
     } catch (err) {

@@ -11,17 +11,10 @@ export class DeleteEventsByWeekdayController {
         +weekday
       );
 
-      if (deletedEvents?.length === 0) {
-        return res.status(200).json({
-          status: 'succes',
-          message: 'No events found',
-        });
-      }
-
       return res.status(200).json({
         status: 'success',
         data: {
-          deletedEvents: deletedEvents,
+          deletedEvents: deletedEvents ?? 'No events found',
         },
       });
     } catch (err) {
