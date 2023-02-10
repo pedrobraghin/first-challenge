@@ -8,7 +8,10 @@ export class InMemoryEventsRepository implements IEventsRepository {
     this.events.push(event);
   }
 
-  getAllEvents(): Event[] {
+  getAllEvents(): Event[] | null {
+    if (this.events.length === 0) {
+      return null;
+    }
     return this.events;
   }
 
