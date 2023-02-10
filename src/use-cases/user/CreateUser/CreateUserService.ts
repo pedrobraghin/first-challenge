@@ -12,7 +12,10 @@ export class CreateUserService {
       throw new Error('Email already exists');
     }
     const salt = await bcrypt.genSalt();
-    user.password = await bcrypt.hash(user.password, salt);
-    this.userRepository.createUser(user);
+    const newUser = { ...user };
+
+    newUser.password = await bcrypt.hash(user.password, salt);
+
+    this.userRepository.createUser(newUser);
   }
 }
