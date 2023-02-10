@@ -24,7 +24,7 @@ export class GetEventByIdController {
         });
       }
 
-      return res.status(404).json({
+      return res.status(500).json({
         status: 'error',
         message: 'Internal Server Error. Please try again later',
       });
