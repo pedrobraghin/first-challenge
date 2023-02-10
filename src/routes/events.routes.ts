@@ -3,39 +3,41 @@ import { eventSchemaValidator } from '../middlewares/eventSchemaValidator';
 import {
   createEventController,
   getAllEventsController,
-  getEventsByWeekdayController,
+  getEventsByDayOfTheWeekController,
   getEventByIdController,
   deleteEventByIdController,
-  deleteEventsByWeekdayController,
+  deleteEventsByDayOfTheWeekController,
 } from '../use-cases/event/index';
 
 const eventRouter = Router();
 
 eventRouter.get('/:id', (req, res) => {
-  getEventByIdController.handle(req, res);
+  return getEventByIdController.handle(req, res);
 });
 
 eventRouter.get('/', (req, res) => {
-  const { weekday } = req.query;
-  if (weekday) {
-    return getEventsByWeekdayController.handle(req, res);
+  const { dayOfTheWeek } = req.query;
+
+  if (dayOfTheWeek) {
+    return getEventsByDayOfTheWeekController.handle(req, res);
   }
-  getAllEventsController.handle(req, res);
+  return getAllEventsController.handle(req, res);
 });
 
 eventRouter.post('/', eventSchemaValidator, (req, res) => {
-  createEventController.handle(req, res);
+  return createEventController.handle(req, res);
 });
 
 eventRouter.delete('/', (req, res) => {
-  const { weekday } = req.query;
-  if (weekday) {
-    return deleteEventsByWeekdayController.handle(req, res);
+  const { dayOfTheWeek } = req.query;
+  if (dayOfTheWeek) {
+    return deleteEventsByDayOfTheWeekController.handle(req, res);
   }
+  return res.status(404).send();
 });
 
 eventRouter.delete('/:id', (req, res) => {
-  deleteEventByIdController.handle(req, res);
+  return deleteEventByIdController.handle(req, res);
 });
 
 export { eventRouter };

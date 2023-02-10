@@ -4,11 +4,11 @@ import { CreateEventService } from './CreateEvent/CreateEventService';
 
 import { DeleteEventByIdController } from './DeleteEvent/DeleteEventByIdController';
 import { DeleteEventsService } from './DeleteEvent/DeleteEventsService';
-import { DeleteEventsByWeekdayController } from './DeleteEvent/DeleteEventsByWeekdayController';
+import { DeleteEventsByDayOfTheWeekController } from './DeleteEvent/DeleteEventsByDayOfTheWeekController';
 
 import { GetAllEventsController } from './GetEvent/GetAllEventsController';
 import { GetEventByIdController } from './GetEvent/GetEventByIdController';
-import { GetEventsByWeekdayController } from './GetEvent/GetEventsByWeekdayController';
+import { GetEventsByDayOfTheWeekController } from './GetEvent/GetEventsByDayOfTheWeekController';
 import { GetEventsService } from './GetEvent/GetEventsService';
 
 const eventRepository = new InMemoryEventsRepository();
@@ -19,13 +19,12 @@ const deleteEventService = new DeleteEventsService(eventRepository);
 const deleteEventByIdController = new DeleteEventByIdController(
   deleteEventService
 );
-const deleteEventsByWeekdayController = new DeleteEventsByWeekdayController(
-  deleteEventService
-);
+const deleteEventsByDayOfTheWeekController =
+  new DeleteEventsByDayOfTheWeekController(deleteEventService);
 
 const getEventService = new GetEventsService(eventRepository);
 const getAllEventsController = new GetAllEventsController(getEventService);
-const getEventsByWeekdayController = new GetEventsByWeekdayController(
+const getEventsByDayOfTheWeekController = new GetEventsByDayOfTheWeekController(
   getEventService
 );
 
@@ -34,8 +33,8 @@ const getEventByIdController = new GetEventByIdController(getEventService);
 export {
   createEventController,
   deleteEventByIdController,
-  deleteEventsByWeekdayController,
+  deleteEventsByDayOfTheWeekController,
   getAllEventsController,
-  getEventsByWeekdayController,
+  getEventsByDayOfTheWeekController,
   getEventByIdController,
 };

@@ -28,6 +28,6 @@ describe('Delete one or more events', () => {
     }).toThrowError(new Error(`Event not found`));
 
     // any value between 0 and 6 can be used to delete
-    expect(deleteEventsService.deleteEventsByWeekday(1)).toHaveLength(0);
+    expect(deleteEventsService.deleteEventsByDayOfTheWeek(1)).toHaveLength(0);
   });
 });

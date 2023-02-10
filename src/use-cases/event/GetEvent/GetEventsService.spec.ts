@@ -48,7 +48,7 @@ describe('Get one or more events', () => {
     );
   });
 
-  it('Should be able to get events by weekday', () => {
+  it('Should be able to get events by day of the week', () => {
     const event1 = new Event(
       'Workshop AI - Morning',
       new Date('2023-06-05').toISOString()
@@ -72,7 +72,7 @@ describe('Get one or more events', () => {
     createEventsService.execute(event3);
     createEventsService.execute(event4);
 
-    const result = getEventsService.getEventsByWeekday(
+    const result = getEventsService.getEventsByDayOfTheWeek(
       new Date(event1.dateTime).getDay()
     );
 

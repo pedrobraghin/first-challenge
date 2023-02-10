@@ -19,10 +19,10 @@ export class InMemoryEventsRepository implements IEventsRepository {
     return this.events.find((event) => event._id === id) ?? null;
   }
 
-  getEventsByWeekday(weekday: number): Event[] | null {
+  getEventsByDayOfTheWeek(dayOfTheWeek: number): Event[] | null {
     const foundEvents = this.events.filter((event) => {
       const eventDate = new Date(event.dateTime).getDay();
-      return eventDate === weekday;
+      return eventDate === dayOfTheWeek;
     });
 
     if (foundEvents.length === 0) {
@@ -41,14 +41,14 @@ export class InMemoryEventsRepository implements IEventsRepository {
     return this.events.splice(eventIndex, 1)[0];
   }
 
-  deleteEventsByWeekday(weekday: number): Event[] | null {
+  deleteEventsByDayOfTheWeek(dayOfTheWeek: number): Event[] | null {
     const deletedEvents: Event[] = [];
     const filteredEvents = this.events.filter((eventToRemove) => {
       const eventDate = new Date(eventToRemove.dateTime).getDay();
-      if (eventDate === weekday) {
+      if (eventDate === dayOfTheWeek) {
         deletedEvents.push(eventToRemove);
       }
-      return eventDate != weekday;
+      return eventDate != dayOfTheWeek;
     });
     this.events = filteredEvents;
 

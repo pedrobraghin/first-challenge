@@ -1,15 +1,16 @@
+import { getDayOfTheWeek } from '../../../utils/getDayOfTheWeek';
 import { Request, Response } from 'express';
 import { DeleteEventsService } from './DeleteEventsService';
 
-export class DeleteEventsByWeekdayController {
+export class DeleteEventsByDayOfTheWeekController {
   constructor(private deleteEventService: DeleteEventsService) {}
 
   handle(req: Request, res: Response) {
-    const weekday = req.query.weekday as string;
+    const dayOfTheWeek = req.query.dayOfTheWeek as string;
     try {
-      const deletedEvents = this.deleteEventService.deleteEventsByWeekday(
-        +weekday
-      );
+      const day = getDayOfTheWeek(dayOfTheWeek);
+      const deletedEvents =
+        this.deleteEventService.deleteEventsByDayOfTheWeek(day);
 
       return res.status(200).json({
         status: 'success',
@@ -18,6 +19,12 @@ export class DeleteEventsByWeekdayController {
         },
       });
     } catch (err) {
+      if (err instanceof Error) {
+        return res.status(400).json({
+          status: 'fail',
+          message: err.message,
+        });
+      }
       return res.status(500).json({
         status: 'fail',
         message: 'Internal Server Error. Please try again later',

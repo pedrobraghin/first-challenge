@@ -16,8 +16,8 @@ export class GetEventsService {
     return event;
   }
 
-  getEventsByWeekday(weekday: number) {
-    const events = this.eventRepository.getEventsByWeekday(weekday);
+  getEventsByDayOfTheWeek(dayOfTheWeek: number) {
+    const events = this.eventRepository.getEventsByDayOfTheWeek(dayOfTheWeek);
     return events;
   }
 }

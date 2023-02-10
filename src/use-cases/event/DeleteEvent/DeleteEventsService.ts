@@ -11,8 +11,9 @@ export class DeleteEventsService {
     return event;
   }
 
-  deleteEventsByWeekday(weekday: number) {
-    const deletedEvents = this.eventsRepository.deleteEventsByWeekday(weekday);
+  deleteEventsByDayOfTheWeek(dayOfTheWeek: number) {
+    const deletedEvents =
+      this.eventsRepository.deleteEventsByDayOfTheWeek(dayOfTheWeek);
     return deletedEvents;
   }
 }
