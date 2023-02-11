@@ -1,6 +1,10 @@
 import express, { Request, Response } from 'express';
 import cors, { CorsOptions } from 'cors';
 import helmet from 'helmet';
+
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocs from './swagger.json';
+
 import { router } from './routes/router';
 
 const app = express();
@@ -16,7 +20,11 @@ app.use(cors(corsOption));
 app.use(express.json());
 
 app.use(BASE_ROUTE, router);
-
+app.use(
+  `${BASE_ROUTE}/api-docs`,
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocs)
+);
 app.use('*', (_, res) => {
   return res.status(404).json({
     status: 'fail',
