@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Challenge #01",
+    "description": "My first challenge as intern at Compass UOL",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/users/signup": {
+      "post": {
+        "summary": "Create user",
+        "description": "Creates a new user",
+        "tags": ["users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              },
+              "examples": {
+                "Create user": {
+                  "value": {
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "birthDate": "1995-02-15",
+                    "email": "john@example.com",
+                    "city": "California",
+                    "country": "United States",
+                    "password": "password",
+                    "confirmPassword": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created user successfully"
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "status": "fail",
+              "message": "Email laready exists"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "user": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "birthDate": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
