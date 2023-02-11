@@ -12,7 +12,7 @@ export const getDayOfTheWeek = (dayOfTheWeek: string) => {
   };
   const day = days[dayOfTheWeek];
   if (day == undefined) {
-    throw new Error(`Invalid day of the week ${dayOfTheWeek}`);
+    throw new Error(`Day of the week invalid`);
   }
   return days[dayOfTheWeek];
 };
