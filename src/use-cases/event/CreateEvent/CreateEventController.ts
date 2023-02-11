@@ -12,12 +12,10 @@ export class CreateEventController {
       this.createEventService.execute(event);
       return res.status(201).send();
     } catch (err) {
-      if (err instanceof Error) {
-        return res.status(400).json({
-          status: 'fail',
-          message: err.message,
-        });
-      }
+      return res.status(500).json({
+        status: 'error',
+        message: 'Internal Server Error. Please try again later.',
+      });
     }
   }
 }
