@@ -15,7 +15,7 @@ export class DeleteEventsByDayOfTheWeekController {
       return res.status(200).json({
         status: 'success',
         data: {
-          deletedEvents: deletedEvents ?? 'No events found',
+          deletedEvents: deletedEvents,
         },
       });
     } catch (err) {

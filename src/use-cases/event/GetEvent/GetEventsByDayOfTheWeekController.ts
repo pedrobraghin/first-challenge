@@ -15,7 +15,7 @@ export class GetEventsByDayOfTheWeekController {
       return res.status(200).json({
         status: 'success',
         data: {
-          events: events ?? 'No events found',
+          events: events,
         },
       });
     } catch (err) {

@@ -10,7 +10,6 @@ export class DeleteEventByIdController {
       const event = this.deleteEventService.deleteEventById(id);
       return res.status(200).json({
         status: 'success',
-        message: 'Event deleted',
         data: {
           event,
         },
