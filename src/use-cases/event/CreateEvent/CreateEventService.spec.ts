@@ -12,7 +12,7 @@ describe('Create event', () => {
   });
 
   it('Should be able to create a new event', async () => {
-    const event = new Event('Test event', '2025-02-13');
+    const event = new Event('Test event', new Date().toISOString());
     expect(createEventService.execute(event)).resolves;
   });
 });
