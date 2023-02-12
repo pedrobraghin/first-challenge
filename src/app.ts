@@ -28,7 +28,7 @@ app.use(
 app.use('*', (_, res) => {
   return res.status(404).json({
     status: 'fail',
-    message: 'Route not found',
+    message: `Route not found. You can see the API documentation at ${process.env.API_DOCS_URL}`,
   });
 });
 
