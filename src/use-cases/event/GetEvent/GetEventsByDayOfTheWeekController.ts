@@ -12,6 +12,13 @@ export class GetEventsByDayOfTheWeekController {
       const day = getDayOfTheWeek(dayOfTheWeek);
       const events = this.getEventService.getEventsByDayOfTheWeek(day);
 
+      if (!events) {
+        return res.status(404).json({
+          status: `fail`,
+          message: 'No events found',
+        });
+      }
+
       return res.status(200).json({
         status: 'success',
         data: {

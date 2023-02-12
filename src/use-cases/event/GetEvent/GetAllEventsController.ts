@@ -8,6 +8,13 @@ export class GetAllEventsController {
     try {
       const allEvents = this.getEventService.getallEvents();
 
+      if (!allEvents) {
+        return res.status(404).json({
+          status: 'fail',
+          message: 'No events found',
+        });
+      }
+
       return res.status(200).json({
         status: 'success',
         data: {

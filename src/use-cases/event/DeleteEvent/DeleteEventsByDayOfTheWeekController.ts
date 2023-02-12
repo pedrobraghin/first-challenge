@@ -12,6 +12,13 @@ export class DeleteEventsByDayOfTheWeekController {
       const deletedEvents =
         this.deleteEventService.deleteEventsByDayOfTheWeek(day);
 
+      if (!deletedEvents) {
+        return res.status(404).json({
+          status: 'fail',
+          message: 'No events found',
+        });
+      }
+
       return res.status(200).json({
         status: 'success',
         data: {

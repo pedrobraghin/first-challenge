@@ -9,10 +9,7 @@ export class InMemoryEventsRepository implements IEventsRepository {
   }
 
   getAllEvents(): Event[] | null {
-    if (this.events.length === 0) {
-      return null;
-    }
-    return this.events;
+    return this.events.length > 0 ? this.events : null;
   }
 
   getEventById(id: string): Event | null {
@@ -29,7 +26,7 @@ export class InMemoryEventsRepository implements IEventsRepository {
       return null;
     }
 
-    return foundEvents;
+    return foundEvents.length > 0 ? foundEvents : null;
   }
 
   deleteEventById(id: string): Event | null {
@@ -52,6 +49,6 @@ export class InMemoryEventsRepository implements IEventsRepository {
     });
     this.events = filteredEvents;
 
-    return deletedEvents;
+    return deletedEvents.length > 0 ? deletedEvents : null;
   }
 }
