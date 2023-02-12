@@ -3,25 +3,28 @@
   "info": {
     "title": "Challenge #01",
     "description": "My first challenge as intern at Compass UOL",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "contact": {
+      "name": "Pedro Braghin",
+      "email": "pedro.braghin.pb@compasso.com.br"
+    }
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api/v1",
-      "description": "Development server"
+      "description": "Development server",
+      "url": "http://localhost:3000/api/v1"
     }
   ],
   "paths": {
     "/users/signup": {
       "post": {
         "summary": "Create user",
-        "description": "Creates a new user",
-        "tags": ["users"],
+        "tags": ["Users"],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/user"
+                "$ref": "#/components/schemas/User"
               },
               "examples": {
                 "Create user": {
@@ -45,10 +48,244 @@
             "description": "Created user successfully"
           },
           "400": {
-            "description": "Invalid request parameters",
+            "description": "Email already exists",
             "content": {
-              "status": "fail",
-              "message": "Email laready exists"
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "fail",
+                    "message": "Email already exists"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/signin": {
+      "post": {
+        "summary": "Authenticate user",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthUser"
+              },
+              "examples": {
+                "Auth User": {
+                  "value": {
+                    "email": "john@example.com",
+                    "password": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authentication successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "message": "Auhtentication successful"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "fail",
+                    "message": "Invalid email or password"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/": {
+      "post": {
+        "summary": "Create event",
+        "tags": ["Events"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              },
+              "examples": {
+                "Create event": {
+                  "value": {
+                    "description": "Hackathon event",
+                    "dateTime": "2023-02-11T20:58:03.643Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create event successfully"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get events",
+        "tags": ["Events"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dayOfTheWeek",
+            "description": "Get events by the day of the week",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/DaysOfTheWeek"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of events or an empty array",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "data": {
+                      "events": [
+                        {
+                          "description": "Hackathon event",
+                          "dateTime": "2023-02-11T20:58:03.643Z",
+                          "createdAt": "2023-02-11T20:58:03.643Z",
+                          "_id": "a04bd7c2-2cf8-4dee-8784-26e71e5d12ca"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/{id}": {
+      "get": {
+        "summary": "Get event by ID",
+        "tags": ["Events"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "The event id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatedEvent"
+                },
+                "example": {
+                  "status": "success",
+                  "data": {
+                    "event": {
+                      "description": "Hackathon event",
+                      "dateTime": "2023-02-11T20:58:03.643Z",
+                      "createdAt": "2023-02-11T20:58:03.643Z",
+                      "_id": "a04bd7c2-2cf8-4dee-8784-26e71e5d12ca"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "fail",
+                    "message": "Event not found"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete event by ID",
+        "tags": ["Events"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "The event id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatedEvent"
+                },
+                "example": {
+                  "status": "success",
+                  "data": {
+                    "event": {
+                      "description": "Hackathon event",
+                      "dateTime": "2023-02-11T20:58:03.643Z",
+                      "createdAt": "2023-02-11T20:58:03.643Z",
+                      "_id": "a04bd7c2-2cf8-4dee-8784-26e71e5d12ca"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "value": {
+                    "status": "string",
+                    "message": "string"
+                  }
+                },
+                "example": {
+                  "status": "fail",
+                  "message": "Event not found"
+                }
+              }
             }
           }
         }
@@ -57,7 +294,7 @@
   },
   "components": {
     "schemas": {
-      "user": {
+      "User": {
         "type": "object",
         "properties": {
           "firstName": {
@@ -85,6 +322,57 @@
             "type": "string"
           }
         }
+      },
+      "AuthUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "dateTime": {
+            "type": "string"
+          }
+        }
+      },
+      "CreatedEvent": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "dateTime": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          }
+        }
+      },
+      "DaysOfTheWeek": {
+        "type": "string",
+        "enum": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday",
+          "sunday"
+        ]
       }
     }
   }
