@@ -20,9 +20,10 @@
 - [Run the tests](#run-the-tests)
 - [Building for production](#building-for-production)
 - [Documentation](#documentation)
-  - [Swagger][swagger]
+  - [Swagger](#swagger)
   - [Users routes](#users-routes)
   - [Events routes](#events-routes)
+- [Deploy on railway](#deploy-on-railway)
 
 <br>
 
@@ -67,7 +68,15 @@ Install dependencies:
 
 ## Documentation
 
-All API endpoints can be found in the documentation below or in the [swagger][swagger] documentation.
+All API endpoints can be found in the documentation below or in the <strong>Swagger</strong> documentation.
+
+## Swagger
+
+In addition to the documentation, the documentation with Swagger is also available at the endpoint:
+
+```
+/api/v1/api-docs
+```
 
 ## Users routes
 
@@ -380,7 +389,17 @@ All API endpoints can be found in the documentation below or in the [swagger][sw
   }
   ```
 
+## Deploy on Railway
+
+<p>
+  The API are deployed on Railway, so you can testing without necessarily intall the application on your machine.
+  Just make the requests to link bellow:
+</p>
+
+```
+https://first-challenge-pb.up.railway.app
+```
+
 [git]: https://git-scm.com
 [node]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/get-npm
-[swagger]: #
