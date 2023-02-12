@@ -192,14 +192,12 @@ In addition to the documentation, the documentation with Swagger is also availab
   }
   ```
 
-  `200 OK`
+  `404 Not Found`
 
   ```json
   {
-    "status": "success",
-    "data:": {
-      "events": []
-    }
+    "status": "fail",
+    "message": "No events found"
   }
   ```
 
@@ -233,19 +231,6 @@ In addition to the documentation, the documentation with Swagger is also availab
   }
   ```
 
-  `Request to: /api/v1/events?dayOfTheWeek=sunday`
-
-  `200 OK`
-
-  ```json
-  {
-    "status": "success",
-    "data": {
-      "events": []
-    }
-  }
-  ```
-
   `Request to: /api/v1/events?dayOfTheWeek=sumday`
 
   `400 Bad Request`
@@ -254,6 +239,17 @@ In addition to the documentation, the documentation with Swagger is also availab
   {
     "status": "fail",
     "message": "Day of the week invalid"
+  }
+  ```
+
+  `Request to: /api/v1/events?dayOfTheWeek=sunday`
+
+  `404 Not Found`
+
+  ```json
+  {
+    "status": "fail",
+    "message": "No events found"
   }
   ```
 
@@ -350,6 +346,17 @@ In addition to the documentation, the documentation with Swagger is also availab
   }
   ```
 
+  `Request to: /api/v1/events?dayOfTheWeek=monday`
+
+  `404 Not Found`
+
+  ```json
+  {
+    "status": "fail",
+    "message": "No events found"
+  }
+  ```
+
 - ## Delete event by id
 
   `DELETE /api/v1/events/{id}`
@@ -388,6 +395,26 @@ In addition to the documentation, the documentation with Swagger is also availab
     "message": "Event not found"
   }
   ```
+
+## Default routes
+
+If a route that not exists is requested, the server return a 404 response:
+
+```json
+{
+  "status": "fail",
+  "message": "Route not found. You can see the API documentation at https://github.com/pedrobraghin/first-challenge"
+}
+```
+
+If a server side error occurs, the server return a 500 response:
+
+```json
+{
+  "status": "error",
+  "message": "Internal server error. Please try again later"
+}
+```
 
 ## Deploy on Railway
 
